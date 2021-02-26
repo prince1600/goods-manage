@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <el-button type="danger">asd</el-button>
+    <router-view></router-view>
   </div>
 </template>
 
