@@ -40,6 +40,7 @@ export default {
       if (status === 400) {
         this.$message.error(msg);
       } else if (status === 200) {
+        localStorage.setItem('token', data.token)
         this.$message.success(msg);
         this.$router.push({ name: "home" });
       }
