@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Login from "@/components/login/login.vue";
 import Home from "@/components/home/home.vue"
 import User from "@/components/user/user.vue"
+import Right from "@/components/rights/right.vue"
+import Roles from "@/components/rights/roles.vue"
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -12,11 +15,21 @@ const routes = [
     component: Home,
     children: [
       {
-      path: 'user',
-      name: 'user',
+      path: 'users',
+      name: 'users',
       component: User
+      },
+      {
+        path: 'rights',
+        name: 'rights',
+        component: Right,
+      },
+      {
+        path: 'roles',
+        name: 'roles',
+        component: Roles,
       }
-    ]
+    ],
   },
   {
     path: '/login',
@@ -35,5 +48,14 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  if (to.path !== '/login') {
+    if (token) next()
+    else next('/login')
+  } else {
+    if (token) next('/')
+    else next()
+  }
+})
 export default router

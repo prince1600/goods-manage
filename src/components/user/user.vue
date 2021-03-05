@@ -2,11 +2,7 @@
   <el-card class="box-card">
     <!-- 1. 面包屑 -->
     <!-- 首页/用户管理/用户列表 -->
-    <el-breadcrumb separator="/">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item><a href="/">用户管理</a></el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <gqs-breadcrumb :crumbs="['首页', '用户管理', '用户列表']"></gqs-breadcrumb>
     <!-- 2.搜索栏 -->
     <el-row class="searchRow">
       <el-col>
@@ -366,8 +362,6 @@ export default {
     },
 
     async getUserList() {
-      const AUTH_TOKEN = localStorage.getItem("token");
-      this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN;
       const res = await this.$http.get(
         `users?query=${this.queryString.trim()}&pagenum=${
           this.pagenum

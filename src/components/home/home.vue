@@ -19,12 +19,11 @@
     </el-header>
     <el-container>
       <el-aside width="200px" class="aside">
-        <el-menu
+        <!-- <el-menu
           class="el-menu-vertical-demo"
           unique-opened
           router
         >
-          <!-- 1 -->
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
@@ -35,22 +34,20 @@
               <span>用户列表</span>
             </el-menu-item>
           </el-submenu>
-          <!-- 2 -->
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>权限管理</span>
             </template>
-            <el-menu-item index="2-1">
+            <el-menu-item index="roles">
               <i class="el-icon-location"></i>
               <span>角色列表</span>
             </el-menu-item>
-            <el-menu-item index="2-2">
+            <el-menu-item index="right">
               <i class="el-icon-location"></i>
               <span>权限列表</span>
             </el-menu-item>
           </el-submenu>
-          <!-- 3 -->
           <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-location"></i>
@@ -69,7 +66,6 @@
               <span>商品分类</span>
             </el-menu-item>
           </el-submenu>
-          <!-- 4 -->
           <el-submenu index="4">
             <template slot="title">
               <i class="el-icon-location"></i>
@@ -80,7 +76,6 @@
               <span>订单列表</span>
             </el-menu-item>
           </el-submenu>
-          <!-- 5 -->
           <el-submenu index="5">
             <template slot="title">
               <i class="el-icon-location"></i>
@@ -91,56 +86,61 @@
               <span>数据报表</span>
             </el-menu-item>
           </el-submenu>
+        </el-menu> -->
+        <el-menu
+          class="el-menu-vertical-demo"
+          unique-opened
+          router
+          :default-openeds="[this.$route.name]"
+          :default-active="this.$route.name"
+        >
+          <template v-for="item in navData">
+            <!-- <el-menu-item v-if="!item.children" :key="item.id">
+              <span>{{item.authName}}</span>
+            </el-menu-item> -->
+            <sub-menu :key="item.id" :item="item"></sub-menu>
+          </template>
         </el-menu>
       </el-aside>
       <el-main class="main">
         <router-view></router-view>
       </el-main>
     </el-container>
+    <!-- delete -->
   </el-container>
 </template>
 
+
 <script>
-const menuData = [
-  {
-    title: "用户管理",
-    children: [{ title: "用户列表" }],
-  },
-  {
-    title: "权限管理",
-    children: [{ title: "角色列表" }, { title: "权限列表" }],
-  },
-  {
-    title: "商品管理",
-    children: [
-      { title: "商品列表" },
-      { title: "分类参数" },
-      { title: "商品分类" },
-    ],
-  },
-  {
-    title: "订单管理",
-    children: [{ title: "订单列表" }],
-  },
-];
+import subMenu from "./subMenu"
 export default {
   data() {
     return {
-      
-    }
+      navData: [],
+    };
   },
-  beforeCreate(){
-    const token = localStorage.getItem('token')
-    if (!token) {
-      this.$router.push({name: 'login'})
-    }
+  components: { "sub-menu": subMenu },
+  // beforeCreate() {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) {
+  //     this.$router.push({ name: "login" });
+  //   }
+  // },
+  beforeMount() {
+    this.getNavData();
+    console.log(this.$route)
   },
   methods: {
-    logout(){
-      localStorage.clear('token')
-      this.$message.success('退出登录')
-      this.$router.push({name: 'login'})
-    }
+    logout() {
+      localStorage.clear("token");
+      this.$message.success("退出登录");
+      this.$router.push({ name: "login" });
+    },
+    async getNavData() {
+      const res = await this.$http.get("menus");
+      this.navData = res.data.data;
+      console.log(this.navData);
+    },
   },
 };
 </script>
