@@ -2,7 +2,7 @@
   <el-card class="box-card">
     <!-- 1. 面包屑 -->
     <!-- 首页/用户管理/用户列表 -->
-    <gqs-breadcrumb :crumbs="['首页', '用户管理', '用户列表']"></gqs-breadcrumb>
+    <gqs-breadcrumb :crumbs="['用户管理', '用户列表']"></gqs-breadcrumb>
     <!-- 2.搜索栏 -->
     <el-row class="searchRow">
       <el-col>

@@ -139,7 +139,7 @@ export default {
     async getNavData() {
       const res = await this.$http.get("menus");
       this.navData = res.data.data;
-      console.log(this.navData);
+      console.log('菜单数据', this.navData);
     },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <el-card>
     <gqs-breadcrumb
-      :crumbs="['首页', '权限管理', '角色列表']"
+      :crumbs="['权限管理', '角色列表']"
       class="crumbs"
     ></gqs-breadcrumb>
     <el-button @click="dialogVisibleAdd = true">添加角色</el-button>

@@ -2,7 +2,7 @@
   <el-card style="height: 100%">
     <!-- 面包屑 -->
     <gqs-breadcrumb
-      :crumbs="['首页', '权限管理', '权限列表']"
+      :crumbs="['权限管理', '权限列表']"
       class="crumbs"
     ></gqs-breadcrumb>
     <!-- 数据列表 -->

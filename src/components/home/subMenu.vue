@@ -5,7 +5,7 @@
        </template>
        <sub-menu v-for="child in item.children" :key="child.id" :item="child"></sub-menu>
    </el-submenu>
-   <el-menu-item v-else :index="item.path">
+   <el-menu-item v-else :route="{name: item.path}" :index="item.path">
        <span>{{item.authName}}</span>
    </el-menu-item>
 </template>
