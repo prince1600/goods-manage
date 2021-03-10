@@ -6,7 +6,7 @@
       v-model="searchText"
       class="search-input"
     >
-      <el-button slot="append" icon="el-icon-search"></el-button>
+      <el-button slot="append" icon="el-icon-search" @click="getGoodsList"></el-button>
     </el-input>
     <el-button type="primary" @click="$router.push({path: '/goods/add'})">新增商品</el-button>
     <el-table

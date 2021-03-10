@@ -91,13 +91,10 @@
           class="el-menu-vertical-demo"
           unique-opened
           router
-          :default-openeds="[this.$route.name]"
           :default-active="this.$route.name"
         >
           <template v-for="item in navData">
-            <!-- <el-menu-item v-if="!item.children" :key="item.id">
-              <span>{{item.authName}}</span>
-            </el-menu-item> -->
+            
             <sub-menu :key="item.id" :item="item"></sub-menu>
           </template>
         </el-menu>
